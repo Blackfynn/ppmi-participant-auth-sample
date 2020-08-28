@@ -1,0 +1,120 @@
+@use "sass:map"; 
+
+/* COLOR PALETTE */
+// neutral
+$black: #000000;
+$hillcock: #70737c;
+$cortex: #d6d7de;
+$axon: #f1f1f3;
+$dendrite: #fbfbfd;
+$white-matter: #ffffff;
+
+// actionable
+$gaba: #10359c;
+$dopamine: #2052e3;
+$notification-bg: #e5efff;
+
+// status
+$error: #e02020;
+$error-bg: #fce4e4;
+$warning: #ffb000;
+$warning-bg: #fff7e5;
+$success: #198038;
+$success-bg: #DEF5E9; 
+
+/* TYPOGRAPHY */
+$font-sizes: (
+    // title
+    "title-extra-large": 2rem, 
+    "title-large": 1.5rem, 
+    "title-medium": 1.25rem,
+    "title-small": 1.125rem,
+    // paragraph
+    "paragraph-large": 1.125rem, 
+    "paragraph-medium": 1rem,
+    "paragraph-small": .875rem,
+    "paragraph-extra-small": .75rem,
+    // interface
+    "interface-medium": 1rem, 
+    "interface-small": .875rem,
+    "interface-extra-small": .75rem
+);
+$line-heights: (
+    // title
+    "title-extra-large": 2.5rem, 
+    "title-large": 2rem, 
+    "title-medium": 1.5rem,
+    "title-small": 1.25rem,
+    // paragraph
+    "paragraph-large": 1.75rem, 
+    "paragraph-medium": 1.5rem,
+    "paragraph-small": 1.25rem,
+    "paragraph-extra-small": 1rem,
+    // interface
+    "interface-medium": 1.25rem, 
+    "interface-small": 1rem,
+    "interface-extra-small": 1rem
+);
+$font-weights: (
+    "bold": 700,
+    "medium": 500, 
+    "regular": 400
+);
+
+// To ensure the weighting is consistent, this mixin should be used to specify font-weights.   
+@mixin text-weight($weight) {
+    font-weight: map-get($font-weights, $weight);
+}
+
+// Cajal's Typography system is divded into a type/style, a font size, and a font weight. 
+// This mixin generates typography styles by providing a style, size and weight and utilizes the names listed in the design files. 
+@mixin text-style($style, $size, $weight) {
+    // map.get is not compatable with our version of sass-loader, we must use map-get instead.
+    font-size: map-get($font-sizes, "#{$style}-#{$size}");
+    line-height: map-get($line-heights, "#{$style}-#{$size}");
+    @include text-weight($weight);
+}
+
+/* BREAKPOINTS */
+$breakpoint-xl: 1280px;
+$breakpoint-desktop: 960px;
+$breakpoint-tablet: 769px;
+$breakpoint-mobile: 512px;
+
+/* ELEVATION: z-index & shadows
+ *
+ * These variables are used within CSS custom props in our App component. 
+ * CSS custom props come in handy since we cannot interpolate SASS vars. 
+ */
+$elevation-sm: 10;
+$elevation-md: 20;
+$elevation-lg: 30;
+
+/* 
+ * the elevate mixin takes a string value used to interpolated CSS custom properties.
+ * if with-shadow = true, the add-elevation-shadow mixin generates the proper shadow for the current elevation
+ */ 
+@mixin elevate($elevation, $with-shadow: true) {
+    z-index: var(--elevation-#{$elevation});
+    @if $with-shadow {
+        @include add-elevation-shadow($elevation)
+    }
+}
+
+@mixin add-elevation-shadow($elevation) {
+    // sm
+    @if $elevation == 'sm' {
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+    }
+    // md 
+    @if $elevation == 'md' {
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.17);
+        border-radius: 4px;
+    }
+    // lg
+    @if $elevation == 'lg' {
+        box-shadow: 0px 7px 28px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+    }
+}

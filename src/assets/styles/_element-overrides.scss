@@ -1,0 +1,572 @@
+@import './_variables';
+
+// need #app for specificity 
+#app {
+  .el-collapse {
+    .el-collapse-item__header {
+      &:hover {
+        color: $gaba;
+        fill: $gaba;
+      }
+    }
+  }
+  // ALERT
+  .el-alert {
+    padding: .5rem;
+    margin-bottom: .5rem;
+    border-radius: 0;
+    background-color: $notification-bg;
+    color: $black;
+
+    svg {
+      display: inline-block;
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: $dopamine;
+      margin-right: .5rem;
+      margin-left: 0rem;
+      flex: none;
+    }
+
+    &__content {
+      padding: 0;
+    }
+
+    &.el-alert--warning {
+      background-color: $warning-bg;
+
+      svg {
+        fill: $warning;
+      }
+    }
+
+    &.el-alert--success {
+      background-color: rgba($success, 0.1);
+
+      svg {
+        fill: $success;
+      }
+    }
+
+    &.el-alert--error {
+      color: $black;
+      background-color: $error-bg;
+
+      svg {
+        fill: $error;
+      }
+    }
+
+    @media screen and (min-width: $breakpoint-desktop) {
+      margin-top: 1rem;
+    }
+  }
+
+  // BUTTON
+  .el-button {
+    min-width: 12rem;
+    padding: calc(1rem - 1px); // offset by 1px for the button border 
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1rem;
+    text-align: left;
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &--primary {
+      background-color: $dopamine;
+      border-color: $dopamine;
+
+      &:focus,
+      &:active,
+      &:not(:disabled):hover {
+        background-color: $gaba;
+        border-color: $gaba;
+      }
+
+      &:disabled {
+        opacity: .75;
+      }
+    }
+
+    &--outline {
+      fill: $dopamine;
+      color: $dopamine;
+      background-color: $white-matter;
+      border-color: $dopamine;
+
+      &:focus,
+      &:active,
+      &:not(:disabled):hover {
+        fill: $gaba;
+        color: $gaba;
+        background-color: $white-matter;
+        border-color: $gaba;
+      }
+
+      &:disabled {
+        background-color: $white-matter;
+        opacity: .6;
+      }
+    }
+
+    &--ghost {
+      fill: $dopamine;
+      color: $dopamine;
+      min-width: 0;
+      padding: .5rem;
+      border: transparent;
+      background-color: transparent;
+
+      &.ghost--black {
+        fill: $black;
+        color: $black;
+      }
+
+      &.ghost--full {
+        padding: 1rem;
+      }
+
+      &.back-link {
+        fill: $black;
+        color: $black;
+        padding-left: 0;
+        margin-top: -.5rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    
+        &:hover, &:focus {
+          fill: $dopamine;
+          color: $dopamine
+        }
+    
+        svg {
+          width: 1.75rem;
+          height: 1.75rem;
+          margin-top: .15rem;
+          margin-left: -.25em;
+        }
+      }
+
+      &:focus,
+      &:active,
+      &:not(:disabled):hover {
+        color: $gaba;
+        fill: $gaba;
+      }
+
+      &:disabled {
+        opacity: .75;
+      }
+    }
+
+    &--menu {
+      min-width: 3rem;
+      min-height: 3rem;
+      padding: 0;
+      border: 1px solid $cortex;
+      border-radius: 2px;
+      background-color: $white-matter;
+      
+      span {
+        display: block;
+        text-align: center;
+        height: 100%;
+      }
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+        max-height: 100%;
+        max-width: 100%;
+        margin: auto;
+        fill: $black;
+      }
+
+      &:focus,
+      &.active,
+      &:not(:disabled):hover {
+        color: $gaba;
+        background-color: $dendrite;
+
+        svg {
+          fill: $gaba;
+        }
+      }
+
+      &:disabled {
+        color: $cortex;
+        background-color: $white-matter;
+        cursor: not-allowed;
+
+        svg {
+          fill: $cortex;
+        }
+
+        &:focus,
+        &:hover {
+          color: $cortex;
+          background-color: $white-matter;
+
+          svg {
+            fill: $cortex;
+          }
+        }
+      }
+    }
+
+    &--highlighted {
+      background-color: $success;
+      color: $white-matter;
+      fill: $white-matter;
+
+      svg {
+        margin: -.5rem; // allow the icon to bleed into the button padding
+      }
+
+      &:disabled {
+        background-color: $success;
+        color: $white-matter;
+        fill: $white-matter;
+      }
+    }
+
+    & + .el-button {
+      margin-left: 0;
+      margin-top: 0;
+    }
+  }
+
+  // TABLE
+  .el-table {
+    color: $black;
+
+    &:before {
+      content: none;
+    }
+    
+    tr:hover td, tr.hover-row td {
+      background-color: initial;
+      cursor: initial;
+    }
+    
+    &.clickable-rows {
+      tr:hover td, tr.hover-row td {
+        background-color: $dendrite;
+        cursor: pointer;
+
+        a {
+          color: $gaba;
+        }
+      }
+    }
+
+    th {
+      color: $black;
+      @include text-style('interface', 'small', 'bold');
+      background-color: $axon;
+      padding: 1rem 0;
+
+      .cell {
+        line-height: 1rem;
+      }
+
+
+      &.is-sortable:hover {
+        color: $gaba;
+        fill: $gaba;
+      }
+    }
+
+    td {
+      padding: 1rem 0;
+      vertical-align: top;
+    }
+    
+    .cell {
+      line-height: 1rem;
+      padding: 0 1rem;
+      word-break: normal;
+    }
+  
+    .caret-wrapper {
+      display: none;
+    }
+
+    .el-dropdown {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+    
+    .el-button--menu {
+      height: 100%;
+    }
+
+    /* 
+     * Ensure the spinner is always at the top of the table, in first row. 
+     * Long tables would cause spinner to appear below the fold.
+     */ 
+    .el-loading-spinner {
+      top: 70px;
+    }
+
+    &.el-table--border td {
+      border-right: none;
+    }
+  }
+
+  .el-table__row:last-of-type {
+    td {
+      border-bottom: none;
+    }
+  }
+
+  .el-loading-mask {
+    background-color: rgba($white-matter, .5);
+
+    .el-loading-spinner {
+      svg {
+        margin: auto;
+      }
+    }  
+  }
+
+  // remove the blue blur on el-radio inputs
+  .el-radio:focus:not(.is-focus):not(:active):not(.is-disabled) .el-radio__inner {
+    box-shadow: none;
+  }
+
+  // remove hoverable border color on disabled selects
+  .el-select .el-input.is-disabled .el-input__inner:hover {
+    border-color: $hillcock;
+  }
+}
+
+/* SELECTS & DROPDOWNS 
+ * using <body> for specificity (dropdown menus are added outside of #app)
+ */
+body {
+  .el-popper {
+    @include add-elevation-shadow(md);
+    border: none;
+
+    // placement rules
+    &[x-placement^=top] {
+      margin-bottom: .5rem !important;
+    }
+
+    &[x-placement^=bottom] {
+      margin-top: .5rem !important;
+    }
+
+    &[x-placement^=right] {
+      margin-left: .5rem;
+    }
+
+    &[x-placement^=left] {
+      margin-right: .5rem;
+    }
+  }
+
+  .el-select-dropdown,
+  .el-dropdown-menu {
+    padding: 0;
+  }
+
+  .popper__arrow {
+    display: none !important;
+  }
+  
+  // TODO: While updating Selects, determine if these can share more styles
+  .el-select-dropdown__item,
+  .el-dropdown-menu__item {
+    background-color: $white-matter;
+    color: $black;
+    @include text-style('interface', 'small', 'medium');
+
+    &:hover,
+    &:focus {
+      background-color: $dendrite;
+      color: $gaba;
+    }
+
+    a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 3rem;
+    }
+
+    &.selected {
+      // account for checkmark image
+      padding-right: 2.75rem;
+      background-color: $white-matter;
+      color: $black;
+      @include text-weight('medium');
+
+      &:before {
+        content: url(../../assets/images/checkmark.svg);
+        width: 1.5rem;
+        height: 1.5rem;
+        position: absolute;
+        right: 1rem;
+      }
+    }
+  }
+  
+  .el-dropdown-menu__item { 
+    position: relative;
+    min-width: 200px;
+    min-height: 3rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom:0;
+      left: 1rem;
+      height: 1px;
+      width: calc(100% - 2rem);
+      background-color: $axon;
+    }
+
+    &:last-of-type {
+      &:after {
+        content: none;
+      }
+    }
+
+    &:not(.is-disabled):hover,
+    &:focus {
+      background-color: $dendrite;
+      color: $gaba;
+    }
+
+    a {
+      min-height: 3rem;
+      color: inherit;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &:hover {
+        color: $gaba;
+
+        svg {
+          fill: $dopamine;
+        }
+      }
+    }
+  }
+
+  .el-picker-panel {
+    &__icon-btn {
+      font-size: 1rem;
+    }
+
+    th {
+      color: $black;
+    }
+  }
+
+  .el-date-picker {
+    &__header-label {
+      color: $black;
+    }
+  }
+
+  .el-date-table {
+    td {
+      &.disabled div {
+        background: none;
+        color: $cortex;
+      }
+
+      &.available {
+        color: $black;
+
+        &:hover {
+          color: $dopamine;
+        }
+      }
+
+      &.today span {
+        color: $dopamine;
+      }
+
+      &.current:not(.disabled) span,
+      &.start-date span,
+      &.end-date span {
+        background-color: $dopamine;
+        @include text-weight('bold');
+      }
+
+      &.in-range,
+      &.start-date,
+      &.end-date {
+        div {
+          background-color: $notification-bg;
+
+          &:hover {
+            background-color: $notification-bg;
+          }
+        }
+      }
+    }
+  }
+
+  .el-date-editor--time {
+    width: 100%;
+  }
+
+  .el-time-spinner__item {
+    color: $black;
+    @include text-weight('regular');
+
+    &.disabled {
+      color: $cortex;
+    }
+
+    &.active:not(.disabled) {
+      color: $black;
+      @include text-weight('bold');
+    }
+  }
+
+  .el-time-panel__btn {
+    margin: 0 .25rem;
+    padding: 0 .25rem;
+
+    &.confirm {
+      color: $dopamine;
+    }
+  }
+
+  // let the browser handle the scrollbars
+  .el-time-spinner .el-scrollbar__thumb {
+    display: none;
+  }
+}
+
+.el-scrollbar {
+  > .el-scrollbar__bar {
+    opacity: 1;
+  }
+}

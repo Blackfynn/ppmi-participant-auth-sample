@@ -1,0 +1,9 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" xml:space="preserve">
+  <style type="text/css">
+    .check1{fill:#2052E3;}
+  </style>
+  <g>
+    <path class="check1" d="M14.1,22.4l-5.8-4.6c-0.4-0.3-0.5-1-0.2-1.4c0.3-0.4,1-0.5,1.4-0.2l4.2,3.4l8.4-10.2c0.4-0.4,1-0.5,1.4-0.1s0.5,1,0.1,1.4 L14.1,22.4z"/>
+  </g>
+</svg>
